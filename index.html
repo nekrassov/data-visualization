@@ -1,0 +1,64 @@
+<html><div id="chartContainer">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
+<script type="text/javascript">
+
+var svg = dimple.newSvg("#chartContainer", 650, 500);
+
+d3.csv("titanic.csv", function(data) {
+
+    var myChart = new dimple.chart(svg, data);
+    myChart.setBounds(60, 80, 510, 380)
+    var xAxis = myChart.addCategoryAxis("x", ["Age", "Survived"]);
+    xAxis.addOrderRule("Age");
+    xAxis.title = "Age/Survived(S)/Died(D)";
+    myChart.addMeasureAxis("y", "Number").title = "Number of people";
+    
+    var s = myChart.addSeries("Sex", dimple.plot.bar);
+    myChart.addLegend(65, 60, 510, 70, "right");
+    
+   // add chart title
+   svg.append("text")
+   .attr("x", myChart._xPixels() + myChart._widthPixels() / 2)
+   .attr("y", myChart._yPixels() - 60)
+   .style("text-anchor", "middle")
+   .style("font-family", "sans-serif")
+   .style("font-weight", "bold")
+   .text("Titanic survival demographics");
+
+   // add labels to the bars
+   // to better show survived/died
+   // (from http://dimplejs.org/advanced_examples_viewer.html?id=advanced_bar_labels)
+   s.afterDraw = function (shape, data) {
+        // Get the shape as a d3 selection
+        var s = d3.select(shape),
+          rect = {
+            x: parseFloat(s.attr("x")),
+            y: parseFloat(s.attr("y")),
+            width: parseFloat(s.attr("width")),
+            height: parseFloat(s.attr("height"))
+          };
+        // Only label bars where the text can fit
+        if (rect.height >= 8) {
+          // Add a text label for the value
+          svg.append("text")
+            // Position in the centre of the shape (vertical position is
+            // manually set due to cross-browser problems with baseline)
+            .attr("x", rect.x + rect.width / 2)
+            .attr("y", rect.y + rect.height / 2 + 3.5)
+            // Centre align
+            .style("text-anchor", "middle")
+            .style("font-size", "8px")
+            .style("font-family", "sans-serif")
+            // Make it a little transparent to tone down the black
+            .style("opacity", 0.6)
+            // Format the number
+            .text(data.xField[1] == "Yes" ? "S" : "D");
+        }   
+    };
+   
+    myChart.draw();
+});
+
+</script>
+</div></html>
