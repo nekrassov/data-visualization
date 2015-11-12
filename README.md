@@ -1,6 +1,4 @@
-# data-visualization
-
-*** Summary
+#Summary
 (in no more than 4 sentences, briefly introduce your data visualization and add any context that can help readers understand it)
 
 My Project shows the Titanic disaster demographics or passenger information between those passengers who survived and those who died.
@@ -9,8 +7,8 @@ The data used for visualization was retrieved from https://www.kaggle.com/c/tita
 with column explanation at https://www.kaggle.com/c/titanic/data 
 
 
-*** Design
-explain any design choices you made including changes to the visualization after collecting feedback
+#Design
+(explain any design choices you made including changes to the visualization after collecting feedback)
 
 After looking at available data columns, I decided to show survival for different ages.
 I decided to use bar chart with Age on X axis, and number of people on Y axis.
@@ -34,24 +32,33 @@ After I started preparing the data, I noticed that even after rounding fractiona
 so I decided to work on age ranges.
 
 To prepare the data I run this script:
-	ipython prep.py
 
-After I started dimple coding, I realized that it is better to change from this format:
+    ipython prep.py
+
+After I started dimple.js coding, I realized that it is better to change from this format:
+
     AgeBucket,NumSurvived,NumDied
 to:
-    Age,Number,Survived
+
+    Age,Number,Survived(Yes/No)
+
 This data format works well for bar chart with grouping by survived/died flag.
 
-dimple gave me a free bonus of mouse hover-over displaying exact number in each bar.
+dimple.js gave me a free bonus of mouse hover-over displaying exact number in each bar.
 This stage is captured in prep(1).py/index(1).html
     
-*** Feedback
-include all feedback you received from others on your visualization from the first sketch to the final visualization
+As my next step I added sex information to the prepared data, and changed chart type to stacked bar chart. 
+To distinguish bars for number of people who died vs. those who survived, I mark the bars with 'D' or 'S' respectively.
 
 
-*** Resources
-list any sources you consulted to create your visualization
+#Feedback
+(include all feedback you received from others on your visualization from the first sketch to the final visualization)
+
+
+#Resources
+(list any sources you consulted to create your visualization)
 
 In addition to the data source web site noted in the Summary above, I used the following resources:
-dimple.js   http://dimplejs.org/
-Python      https://docs.python.org/2/index.html
+
++ dimple.js   http://dimplejs.org/
++ Python      https://docs.python.org/2/index.html
