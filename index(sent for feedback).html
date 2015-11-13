@@ -3,20 +3,19 @@
 <script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
 <script type="text/javascript">
 
-var svg = dimple.newSvg("#chartContainer", 750, 500);
+var svg = dimple.newSvg("#chartContainer", 650, 500);
 
 d3.csv("titanic.csv", function(data) {
 
     var myChart = new dimple.chart(svg, data);
-    myChart.setBounds(60, 80, 700, 380)
+    myChart.setBounds(60, 80, 510, 380)
     var xAxis = myChart.addCategoryAxis("x", ["Age", "Survived"]);
     xAxis.addOrderRule("Age");
     xAxis.title = "Age/Survived(S)/Died(D)";
-    //myChart.addMeasureAxis("y", "Number").title = "Number of people";
-    myChart.addPctAxis("y", "Number").title = "Percent of people";
+    myChart.addMeasureAxis("y", "Number").title = "Number of people";
     
     var s = myChart.addSeries("Sex", dimple.plot.bar);
-    myChart.addLegend(65, 55, 690, 65, "right");
+    myChart.addLegend(65, 60, 510, 70, "right");
     
    // add chart title
    svg.append("text")
@@ -54,7 +53,7 @@ d3.csv("titanic.csv", function(data) {
             // Make it a little transparent to tone down the black
             .style("opacity", 0.6)
             // Format the number
-            .text(data.yValue + " " + (data.xField[1] == "Yes" ? "S" : "D"));
+            .text(data.xField[1] == "Yes" ? "S" : "D");
         }   
     };
    
