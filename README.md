@@ -53,9 +53,10 @@ Also, by adding simple number labels, I was able to preserve count information.
 
 #Feedback
 (include all feedback you received from others on your visualization from the first sketch to the final visualization)
-- I received feedback that it is not obvious *what* I'm trying to communicate with my visualization. To address this, I added clear statement: that I want to __*"show how survival rate for men is different than that for women in different age groups"*__
-- I received feedback that percent survived/died for each group may better communicate my message. That led to switch to percent bar chart.
-- I received feedback that I need to justify my choice of chart type. That is now addressed at the end of the previous section.
+
++ I received feedback that it is not obvious *what* I'm trying to communicate with my visualization. To address this, I added clear statement: that I want to __*"show how survival rate for men is different than that for women in different age groups"*__
++ I received feedback that percent survived/died for each group may better communicate my message. That led to switch to percent bar chart.
++ I received feedback that I need to justify my choice of chart type. That is now addressed at the end of the previous section.
 
 #Resources
 (list any sources you consulted to create your visualization)
