@@ -43,7 +43,7 @@ After collecting feedback, I decided to switch my chart type to proportional gro
 While this showed rate/percentage, I lost information about total count per group. To fix that, I added count label to each bar.
 I also made the chart wider to give more space for my bar labels.
 
-This final version is captured in prep(3).py/index(3).html
+This version is captured in prep(3).py/index(3).html
 
 In my opinion, proportional grouped vertical bar chart is good choice for my message 
 because we can clearly see the difference in survival rate between men and women for different age groups. 
@@ -51,11 +51,12 @@ In particular, higher percent of women survived in each age group compared to pe
 Bar chart is easy to understand, shows different age groups side by side, allowing direct comparison of survival rate between age groups.
 Also, by adding simple number labels, I was able to preserve count information.
 
-After receiving reviewer's feedback, I made the following changes:
+**After receiving reviewer's feedback, I made the following changes:**
+
 + fixed inconsistent indents in index.html
 + removed numbers from the chart
 + switched survived/died and sex attributes in the stacked bar chart; that removed ambiguity in chart interpretation
-+ grouped ages above 60 to single group 60+ to get rid of strange bars for groups with little data
++ grouped ages above 60 to single group 60+
 + added animation through classes (with pause feature)
 + imposed order on series to have "Died" represented by red colour
 
