@@ -8,57 +8,50 @@ var svg = dimple.newSvg("#chartContainer", 750, 500);
 d3.csv("titanic.csv", function(data) {
 
     var myChart = new dimple.chart(svg, data);
-    myChart.setBounds(60, 80, 700, 380)
-    var xAxis = myChart.addCategoryAxis("x", ["Age", "Survived"]);
+    myChart.setBounds(60, 90, 700, 370)
+    var xAxis = myChart.addCategoryAxis("x", ["Age", "Sex"]);
     xAxis.addOrderRule("Age");
-    xAxis.title = "Age/Survived(S)/Died(D)";
-    //myChart.addMeasureAxis("y", "Number").title = "Number of people";
+    xAxis.title = "Age/Sex";
     myChart.addPctAxis("y", "Number").title = "Percent of people";
     
-    var s = myChart.addSeries("Sex", dimple.plot.bar);
-    myChart.addLegend(65, 55, 690, 65, "right");
+    var s = myChart.addSeries("Survived", dimple.plot.bar);
+    s.addOrderRule(["Survived", "Died"]);
+    s.addEventHandler("click", onClick);
+    var myLegend = myChart.addLegend(65, 55, 690, 65, "right");
     
-   // add chart title
-   svg.append("text")
-   .attr("x", myChart._xPixels() + myChart._widthPixels() / 2)
-   .attr("y", myChart._yPixels() - 60)
-   .style("text-anchor", "middle")
-   .style("font-family", "sans-serif")
-   .style("font-weight", "bold")
-   .text("Titanic survival demographics");
+    // add chart title
+    svg.append("text")
+        .attr("x", myChart._xPixels() + myChart._widthPixels() / 2)
+        .attr("y", myChart._yPixels() - 60)
+        .style("text-anchor", "middle")
+        .style("font-family", "sans-serif")
+        .style("font-weight", "bold")
+        .text("Titanic survival demographics");
 
-   // add labels to the bars
-   // to better show survived/died
-   // (from http://dimplejs.org/advanced_examples_viewer.html?id=advanced_bar_labels)
-   s.afterDraw = function (shape, data) {
-        // Get the shape as a d3 selection
-        var s = d3.select(shape),
-          rect = {
-            x: parseFloat(s.attr("x")),
-            y: parseFloat(s.attr("y")),
-            width: parseFloat(s.attr("width")),
-            height: parseFloat(s.attr("height"))
-          };
-        // Only label bars where the text can fit
-        if (rect.height >= 8) {
-          // Add a text label for the value
-          svg.append("text")
-            // Position in the centre of the shape (vertical position is
-            // manually set due to cross-browser problems with baseline)
-            .attr("x", rect.x + rect.width / 2)
-            .attr("y", rect.y + rect.height / 2 + 3.5)
-            // Centre align
-            .style("text-anchor", "middle")
-            .style("font-size", "8px")
-            .style("font-family", "sans-serif")
-            // Make it a little transparent to tone down the black
-            .style("opacity", 0.6)
-            // Format the number
-            .text(data.yValue + " " + (data.xField[1] == "Yes" ? "S" : "D"));
-        }   
-    };
-   
+    svg.append("text")
+        .attr("x", myChart._xPixels() + myChart._widthPixels() / 2)
+        .attr("y", myChart._yPixels() - 50)
+        .style("text-anchor", "middle")
+        .style("font-family", "sans-serif")
+        .style("font-size", "9")
+        .text("(click on any of the bars to pause/resume animation)");
+        
+        
+    // add animation by class
+    var story = myChart.setStoryboard("Class");
+
     myChart.draw();
+
+    // pause/resume animation
+    var paused = false;
+    function onClick(e) {
+        if (paused) {
+            story.startAnimation();
+        } else {
+            story.pauseAnimation();
+        }
+        paused = !paused;
+    }
 });
 
 </script>
