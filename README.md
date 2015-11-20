@@ -60,6 +60,13 @@ Also, by adding simple number labels, I was able to preserve count information.
 + added animation through classes (with pause feature)
 + imposed order on series to have "Died" represented by red colour
 
+For the final version I:
+
++ made age buckets wider,
++ change to plotting survival rate rather than stacking survival and non-survival rate on top of each other
++ slowed animation, and expanded title to make it easier to see and understand what is being presented
++ added small numbers to 0 values to avoid 'disappearing' bars
+
 #Feedback
 (include all feedback you received from others on your visualization from the first sketch to the final visualization)
 

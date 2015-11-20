@@ -10,12 +10,13 @@ d3.csv("titanic.csv", function(data) {
     var myChart = new dimple.chart(svg, data);
     myChart.setBounds(60, 90, 700, 370)
     var xAxis = myChart.addCategoryAxis("x", ["Age", "Sex"]);
-    xAxis.addOrderRule("Age");
+    //xAxis.addOrderRule("Age");
+    xAxis.addOrderRule(["<13","13-18","19-25","26-54","55+"]);
     xAxis.title = "Age/Sex";
-    myChart.addPctAxis("y", "Number").title = "Percent of people";
+    myChart.addMeasureAxis("y", "PctSurvived").title = "Percent of people";
     
-    var s = myChart.addSeries("Survived", dimple.plot.bar);
-    s.addOrderRule(["Survived", "Died"]);
+    var s = myChart.addSeries("Sex", dimple.plot.bar);
+    s.addOrderRule(["Male", "Female"]);
     s.addEventHandler("click", onClick);
     var myLegend = myChart.addLegend(65, 55, 690, 65, "right");
     
@@ -26,7 +27,7 @@ d3.csv("titanic.csv", function(data) {
         .style("text-anchor", "middle")
         .style("font-family", "sans-serif")
         .style("font-weight", "bold")
-        .text("Titanic survival demographics");
+        .text("Titanic survival demographics based on age, sex and passenger class");
 
     svg.append("text")
         .attr("x", myChart._xPixels() + myChart._widthPixels() / 2)
@@ -39,6 +40,7 @@ d3.csv("titanic.csv", function(data) {
         
     // add animation by class
     var story = myChart.setStoryboard("Class");
+    story.frameDuration = 5000;
 
     myChart.draw();
 
